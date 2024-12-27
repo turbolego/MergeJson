@@ -11,7 +11,13 @@
         <h1>JSON Merger</h1>
         <textarea id="inputJson1" placeholder="Enter JSON 1 here..."></textarea>
         <textarea id="inputJson2" placeholder="Enter JSON 2 here..."></textarea>
-        <select id="keysToMerge" multiple>
+        <select id="keyFromJson1">
+            <!-- Options will be populated dynamically -->
+        </select>
+        <select id="keyFromJson2">
+            <!-- Options will be populated dynamically -->
+        </select>
+        <select id="keyToKeep">
             <!-- Options will be populated dynamically -->
         </select>
         <button onclick="mergeJson()">Merge JSON</button>
