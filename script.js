@@ -76,6 +76,11 @@ function mergeJson() {
             const match = json2.find(obj2 => obj2[keyFromJson2] === obj1[keyFromJson1]);
             if (match) {
                 obj1[keyToKeep] = match[keyFromJson2];
+                Object.keys(match).forEach(key => {
+                    if (key !== keyFromJson2) {
+                        obj1[key] = match[key];
+                    }
+                });
             }
             return obj1;
         });
