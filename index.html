@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Merger</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>JSON Merger</h1>
+        <textarea id="inputJson1" placeholder="Enter JSON 1 here..."></textarea>
+        <textarea id="inputJson2" placeholder="Enter JSON 2 here..."></textarea>
+        <select id="keysToMerge" multiple>
+            <!-- Options will be populated dynamically -->
+        </select>
+        <button onclick="mergeJson()">Merge JSON</button>
+        <textarea id="outputJson" placeholder="Output JSON will appear here..."></textarea>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
