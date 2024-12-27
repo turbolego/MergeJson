@@ -2,20 +2,23 @@ document.getElementById('inputJson1').addEventListener('input', populateKeys);
 document.getElementById('inputJson2').addEventListener('input', populateKeys);
 
 function populateKeys() {
-    const inputJson1 = document.getElementById('inputJson1').value;
-    const inputJson2 = document.getElementById('inputJson2').value;
+    const inputJson1 = document.getElementById('inputJson1').value.trim();
+    const inputJson2 = document.getElementById('inputJson2').value.trim();
     let keys1 = new Set();
     let keys2 = new Set();
 
     try {
-        const json1 = JSON.parse(inputJson1);
-        const json2 = JSON.parse(inputJson2);
-
-        if (Array.isArray(json1) && json1.length > 0) {
-            Object.keys(json1[0]).forEach(key => keys1.add(key));
+        if (inputJson1) {
+            const json1 = JSON.parse(inputJson1);
+            if (Array.isArray(json1) && json1.length > 0) {
+                Object.keys(json1[0]).forEach(key => keys1.add(key));
+            }
         }
-        if (Array.isArray(json2) && json2.length > 0) {
-            Object.keys(json2[0]).forEach(key => keys2.add(key));
+        if (inputJson2) {
+            const json2 = JSON.parse(inputJson2);
+            if (Array.isArray(json2) && json2.length > 0) {
+                Object.keys(json2[0]).forEach(key => keys2.add(key));
+            }
         }
     } catch (e) {
         console.error('Invalid JSON in input fields:', e);
@@ -59,8 +62,8 @@ function populateKeys() {
 }
 
 function mergeJson() {
-    const inputJson1 = document.getElementById('inputJson1').value;
-    const inputJson2 = document.getElementById('inputJson2').value;
+    const inputJson1 = document.getElementById('inputJson1').value.trim();
+    const inputJson2 = document.getElementById('inputJson2').value.trim();
     const keyFromJson1 = document.getElementById('keyFromJson1').value;
     const keyFromJson2 = document.getElementById('keyFromJson2').value;
     const keyToKeep = document.getElementById('keyToKeep').value;
