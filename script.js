@@ -18,7 +18,8 @@ function populateKeys() {
             Object.keys(json2[0]).forEach(key => keys2.add(key));
         }
     } catch (e) {
-        console.error('Invalid JSON');
+        console.error('Invalid JSON in input fields:', e);
+        return;
     }
 
     const select1 = document.getElementById('keyFromJson1');
@@ -77,7 +78,7 @@ function mergeJson() {
         });
         outputJson = JSON.stringify(mergedJson, null, 2);
     } catch (e) {
-        outputJson = 'Invalid JSON';
+        outputJson = 'Invalid JSON: ' + e.message;
     }
 
     document.getElementById('outputJson').value = outputJson;
