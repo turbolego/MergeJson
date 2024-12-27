@@ -4,49 +4,74 @@ document.getElementById('inputJson2').addEventListener('input', populateKeys);
 function populateKeys() {
     const inputJson1 = document.getElementById('inputJson1').value;
     const inputJson2 = document.getElementById('inputJson2').value;
-    let keys = new Set();
+    let keys1 = new Set();
+    let keys2 = new Set();
 
     try {
         const json1 = JSON.parse(inputJson1);
         const json2 = JSON.parse(inputJson2);
 
         if (Array.isArray(json1) && json1.length > 0) {
-            Object.keys(json1[0]).forEach(key => keys.add(key));
+            Object.keys(json1[0]).forEach(key => keys1.add(key));
         }
         if (Array.isArray(json2) && json2.length > 0) {
-            Object.keys(json2[0]).forEach(key => keys.add(key));
+            Object.keys(json2[0]).forEach(key => keys2.add(key));
         }
     } catch (e) {
         console.error('Invalid JSON');
     }
 
-    const select = document.getElementById('keysToMerge');
-    select.innerHTML = '';
-    keys.forEach(key => {
+    const select1 = document.getElementById('keyFromJson1');
+    const select2 = document.getElementById('keyFromJson2');
+    const select3 = document.getElementById('keyToKeep');
+    select1.innerHTML = '';
+    select2.innerHTML = '';
+    select3.innerHTML = '';
+
+    keys1.forEach(key => {
         const option = document.createElement('option');
         option.value = key;
         option.textContent = key;
-        select.appendChild(option);
+        select1.appendChild(option);
+    });
+
+    keys2.forEach(key => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = key;
+        select2.appendChild(option);
+    });
+
+    keys1.forEach(key => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = key;
+        select3.appendChild(option);
+    });
+
+    keys2.forEach(key => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = key;
+        select3.appendChild(option);
     });
 }
 
 function mergeJson() {
     const inputJson1 = document.getElementById('inputJson1').value;
     const inputJson2 = document.getElementById('inputJson2').value;
-    const keysToMerge = Array.from(document.getElementById('keysToMerge').selectedOptions).map(option => option.value);
+    const keyFromJson1 = document.getElementById('keyFromJson1').value;
+    const keyFromJson2 = document.getElementById('keyFromJson2').value;
+    const keyToKeep = document.getElementById('keyToKeep').value;
     let outputJson = '';
 
     try {
         const json1 = JSON.parse(inputJson1);
         const json2 = JSON.parse(inputJson2);
         const mergedJson = json1.map(obj1 => {
-            const match = json2.find(obj2 => obj2.Verksemd === obj1.name);
+            const match = json2.find(obj2 => obj2[keyFromJson2] === obj1[keyFromJson1]);
             if (match) {
-                keysToMerge.forEach(key => {
-                    if (match[key]) {
-                        obj1[key] = match[key];
-                    }
-                });
+                obj1[keyToKeep] = match[keyFromJson2];
             }
             return obj1;
         });
